@@ -4,8 +4,13 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.api.v1.router import router as v1_router
+from app.api.router import router as api_router
 from app.core.config import settings
+from app.core.exception_handlers import register_exception_handlers
+from app.core.logging_config import configure_logging
+from app.core.middleware import RequestIDMiddleware
+
+configure_logging()
 
 app = FastAPI(
     title=settings.app_name,
@@ -14,6 +19,9 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
 )
+
+app.add_middleware(RequestIDMiddleware)
+register_exception_handlers(app)
 
 if settings.cors_origin_list:
     app.add_middleware(
@@ -24,7 +32,7 @@ if settings.cors_origin_list:
         allow_headers=["*"],
     )
 
-app.include_router(v1_router, prefix=settings.api_prefix)
+app.include_router(api_router, prefix=settings.api_prefix)
 
 
 @app.get("/ping", tags=["infra"], include_in_schema=False)

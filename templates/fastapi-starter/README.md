@@ -24,10 +24,15 @@ Open http://127.0.0.1:8000/docs for interactive API documentation.
 
 ```
 app/
-  core/       # Settings and shared infrastructure
-  api/v1/     # Versioned HTTP routes
+  api/        # API router composition
+  core/       # Settings, middleware, logging, exception handlers
+  features/   # Feature-based modules (router/service/schemas)
+  schemas/    # Shared response/request schemas
 tests/        # pytest suite
 ```
+
+See [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for the full
+feature-based architecture guide.
 
 ## Configuration
 
