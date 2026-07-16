@@ -37,3 +37,10 @@ feature-based architecture guide.
 ## Configuration
 
 Copy `.env.example` to `.env` and adjust values as needed.
+
+The template also exposes scaffold-time options through `cpa.config.json`:
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `apiPrefix` | `/api/v1` | Prefix used when mounting `app/api/router.py` |
+| `enableCors` | `true` | Whether generated `app/main.py` registers CORS middleware |
