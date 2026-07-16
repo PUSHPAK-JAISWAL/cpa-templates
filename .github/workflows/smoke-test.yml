@@ -66,10 +66,13 @@ jobs:
           if [ -n "${{ matrix.extension }}" ]; then
             ADDON_ARGS+=(--addons "file://${CPA_TEMPLATES_ROOT}?subdir=extensions/${{ matrix.extension }}")
           fi
-          ${{ steps.cli.outputs.bin }} smoke-test-project \
+          # Typer requires options before the project-directory argument when
+          # the CLI also exposes subcommands (e.g. `cache`).
+          ${{ steps.cli.outputs.bin }} \
             --template "file://${CPA_TEMPLATES_ROOT}?subdir=templates/fastapi-starter" \
             --no-interactive --no-install \
-            "${ADDON_ARGS[@]}"
+            "${ADDON_ARGS[@]}" \
+            smoke-test-project
           echo "Project scaffolded: ${{ matrix.name }} (cli=${{ steps.cli.outputs.mode }})"
 
       - name: Run basic checks
