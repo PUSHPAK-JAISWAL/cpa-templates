@@ -9,9 +9,9 @@
     },
     {
       "key": "enableCors",
-      "type": "string",
-      "message": "Enable CORS middleware (true/false)",
-      "default": "true"
+      "type": "boolean",
+      "message": "Enable CORS middleware",
+      "default": true
     }
   ]
 }
