@@ -57,7 +57,31 @@ Add `--verbose` to scaffold commands when supported by the CLI.
 
 `.github/workflows/smoke-test.yml` runs on pull requests to `main`. It scaffolds projects with `file://` URLs from the PR checkout and runs `uv sync`, lint, and tests.
 
+## Combination matrix CI
+
+`.github/workflows/test-combinations.yml` exercises template × extension combinations from `templates.json`:
+
+- **Push to `main`**: one randomly selected extension per category per template (respecting `incompatibleWith`).
+- **Weekly schedule / manual dispatch**: all mutually compatible extensions applied together per template.
+
+Each job scaffolds with `file://` URLs, then runs `uv sync`, `uv run ruff check .`, and `uv run pytest -q`.
+
 To reproduce locally:
+
+```sh
+REPO="$PWD"
+CI=true CPA_SKIP_GIT=1 uvx create-awesome-python-app combo-test-app \
+  --template "file://$REPO?subdir=templates/fastapi-starter" \
+  --addons \
+    "file://$REPO?subdir=extensions/github-setup" \
+    "file://$REPO?subdir=extensions/python-docker" \
+  --no-interactive --no-install
+cd combo-test-app && uv sync && uv run ruff check . && uv run pytest -q
+```
+
+## Smoke test local reproduction
+
+To reproduce the PR smoke test locally:
 
 ```sh
 REPO="$PWD"
