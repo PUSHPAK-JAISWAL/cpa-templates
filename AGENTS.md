@@ -35,4 +35,5 @@ See [docs/TESTING.md](./docs/TESTING.md) for more examples and CI details.
 | [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) | System overview, type system, generation flow |
 | [docs/AUTHORING.md](./docs/AUTHORING.md) | Directory layout, `cpa.config.json`, extensions |
 | [docs/TESTING.md](./docs/TESTING.md) | Local testing commands and CI workflow |
+| [docs/MAINTENANCE_RUNBOOK.md](./docs/MAINTENANCE_RUNBOOK.md) | Operating constraints, decision tree, maintenance index |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | How to add templates and extensions |
