@@ -31,8 +31,13 @@ app/
 tests/        # pytest suite
 ```
 
-See [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) for the full
-feature-based architecture guide.
+See the docs suite for deeper guidance:
+
+- [`docs/PROJECT_STRUCTURE.md`](docs/PROJECT_STRUCTURE.md) — feature-based architecture
+- [`docs/API.md`](docs/API.md) — endpoints and response envelope
+- [`docs/TESTING_GUIDE.md`](docs/TESTING_GUIDE.md) — pytest patterns
+- [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — shipping and health probes
+- [`docs/README.md`](docs/README.md) — docs index
 
 ## Configuration
 
