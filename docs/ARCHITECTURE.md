@@ -66,3 +66,7 @@ cpa-templates/
 
 - **create-python-app** — CLI monorepo (`create-awesome-python-app`, `create-python-app-core`)
 - **cpa-templates** (this repo) — template and extension bank
+
+## Maintenance
+
+Operational runbooks for CI, dependencies, security, releases, and template work live under [docs/MAINTENANCE_RUNBOOK.md](./MAINTENANCE_RUNBOOK.md).
