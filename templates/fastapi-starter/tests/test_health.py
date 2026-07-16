@@ -7,9 +7,22 @@ def test_healthz_returns_healthy(client: TestClient) -> None:
     response = client.get("/api/v1/healthz")
     assert response.status_code == 200
     body = response.json()
-    assert body["status"] == "healthy"
-    assert body["service"] == "fastapi-starter"
-    assert "timestamp" in body
+    assert body["success"] is True
+    assert body["dev_code"] == "HEALTH_OK"
+    assert body["data"]["status"] == "healthy"
+    assert body["data"]["service"] == "fastapi-starter"
+    assert "timestamp" in body["data"]
+    assert body["metadata"]["request_id"]
+    assert response.headers["x-request-id"] == body["metadata"]["request_id"]
+
+
+def test_healthz_echoes_request_id(client: TestClient) -> None:
+    request_id = "test-request-id"
+    response = client.get("/api/v1/healthz", headers={"X-Request-ID": request_id})
+    assert response.status_code == 200
+    body = response.json()
+    assert body["metadata"]["request_id"] == request_id
+    assert response.headers["x-request-id"] == request_id
 
 
 def test_ping_returns_ok(client: TestClient) -> None:
