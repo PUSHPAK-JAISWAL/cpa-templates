@@ -25,6 +25,15 @@
       "type": "fastapi-backend",
       "category": "backend-applications",
       "labels": ["FastAPI", "API", "Python", "uv", "Backend"]
+    },
+    {
+      "name": "FastAPI Typed Starter",
+      "slug": "fastapi-typed-starter",
+      "description": "FastAPI starter with strict typing support, mypy, pyright, and type-focused developer tooling",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/fastapi-typed-starter",
+      "type": "fastapi-backend",
+      "category": "backend-applications",
+      "labels": ["FastAPI", "API", "Python", "Type Hints", "mypy", "pyright"]
     }
   ],
   "extensions": [
