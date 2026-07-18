@@ -1,0 +1,4 @@
+[project]
+dependencies = [
+  "pre-commit>=4.0.0",
+]

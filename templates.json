@@ -344,6 +344,41 @@
         "FastAPI",
         "Security"
       ]
+    },
+    {
+      "name": "Pre-commit",
+      "slug": "pre-commit",
+      "description": "Local quality gates with Ruff, YAML validation, and whitespace checks for every CPA template.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/all-pre-commit",
+      "type": [
+        "celery-worker",
+        "cli-app",
+        "django-backend",
+        "fastapi-backend",
+        "uv-workspace"
+      ],
+      "category": "ci",
+      "labels": [
+        "Pre-commit",
+        "Quality",
+        "Git Hooks"
+      ]
+    },
+    {
+      "name": "FastAPI OpenTelemetry",
+      "slug": "fastapi-opentelemetry",
+      "description": "OpenTelemetry tracing and logging hooks for FastAPI projects, useful for local debugging and observability setup.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-opentelemetry",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "observability",
+      "labels": [
+        "OpenTelemetry",
+        "Tracing",
+        "Observability",
+        "FastAPI"
+      ]
     }
   ]
 }
