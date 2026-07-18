@@ -19,7 +19,7 @@ The bank `README.md` (this file) stays **outside** `template/` so it does not ov
 uvx create-awesome-python-app my-api \
   --template fastapi-starter \
   --addons pre-commit \
-  --yes
+  --no-interactive
 ```
 
 ## Verify after scaffold

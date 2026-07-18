@@ -7,7 +7,7 @@ This extension adds lightweight quality gates so local changes are checked befor
 - Ruff lint/format hooks
 - YAML validation
 - Trailing whitespace and EOF checks
-- A `pre-commit` dependency for the generated project
+- A `pre-commit` dependency in the project's `dev` dependency group
 
 ## Install
 
