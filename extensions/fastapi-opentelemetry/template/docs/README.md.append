@@ -1,0 +1,1 @@
+- [OpenTelemetry tracing](./OTEL_GUIDE.md) — add request tracing and logging instrumentation to FastAPI apps

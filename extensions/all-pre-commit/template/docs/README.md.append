@@ -1,0 +1,1 @@
+- [Pre-commit hooks](./PRE_COMMIT_GUIDE.md) — run Ruff, YAML, and whitespace checks locally before commits
