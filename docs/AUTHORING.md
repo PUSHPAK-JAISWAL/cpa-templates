@@ -99,14 +99,58 @@ Static files (no suffix) are copied as-is. Later layers overwrite earlier files 
 
 ## Naming conventions (parity with cna-templates)
 
+### Compose / Docker file names
+
 | Prefer | Avoid |
 |--------|--------|
 | `compose.yml` / `compose.prod.yml` | `docker-compose.yml` |
 | `docker/<engine>/compose.yml` for DB services | Root `docker-compose.*.yml` overlays only |
 | `.dockerignore` next to `Dockerfile` | Omitting ignore rules |
-| Extension dir that matches the files you ship | Mixing unrelated stacks in one extension |
 
 Compose is invoked as `docker compose -f compose.yml …` (Compose V2 file naming).
+
+### Extension folder taxonomy (CNA parity)
+
+**Folder name = coupling truth.** Catalog `slug` may be friendlier than the folder, but never claim universality when the overlay is stack-bound.
+
+| Kind | Folder pattern | Catalog slug | `type` field |
+|------|----------------|--------------|--------------|
+| Universal | `all-{capability}` | often friendly (`github-setup`, `development-container`, `postgres`) | Broad list of all compatible template types |
+| Stack-specific | `{stack}-{capability}` | usually matches folder (`fastapi-docker`, `fastapi-sqlalchemy`) | Only that stack's template `type` |
+
+Examples:
+
+| Folder | Slug | Meaning |
+|--------|------|---------|
+| `extensions/all-github-setup` | `github-setup` | Portable CI/repo automation |
+| `extensions/all-devcontainer` | `development-container` | VS Code Dev Container for any CPA template |
+| `extensions/all-postgres` | `postgres` | Infra-only Postgres Compose (no `app/` writes) |
+| `extensions/fastapi-docker` | `fastapi-docker` | Dockerfile/Compose with `uvicorn app.main:app` |
+| `extensions/django-docker` | `django-docker` | Dockerfile/Compose for Django/`gunicorn` |
+| `extensions/celery-docker` | `celery-docker` | Dockerfile/Compose for Celery worker |
+| `extensions/fastapi-sqlalchemy` | `fastapi-sqlalchemy` | FastAPI `app/db/` + Alembic |
+
+**Never** use a generic `python-*` folder/slug for overlays that write FastAPI `app/` paths or a FastAPI-only `CMD`.
+
+### Template quality bar (every catalog template)
+
+Every template registered in `templates.json` must ship at least:
+
+| Area | Required |
+|------|----------|
+| Architecture | Feature/module layout appropriate to the stack (not a single flat hello-world module) |
+| `docs/` | `README.md`, `PROJECT_STRUCTURE.md`, `CONFIGURATION.md`, `TESTING_GUIDE.md`, `DEPLOYMENT.md`, plus stack docs (e.g. `API.md` for HTTP APIs) |
+| Root docs | Strong `README.md` (or `.template`), `AGENTS.md`, `CONTRIBUTING.md`, `.env.example` |
+| Tooling | `pyproject.toml` with Ruff + pytest (and stack-native tools); typed Python documented |
+| Tests | Real tests under `tests/` that exercise health/core paths |
+
+`fastapi-starter` is the reference implementation. Raise new templates *to* that bar; do not dilute it.
+
+Do **not** add a second FastAPI base template for strict typing. Typing tooling and
+`docs/TYPING.md` live in `fastapi-starter` itself. If you need an optional stricter
+overlay later, ship a thin `fastapi-strict-typing` **extension**, not a competing starter.
+
+Reference quality bars outside this repo: [cna-templates `react-vite-starter`](https://github.com/Create-Node-App/cna-templates/tree/main/templates/react-vite-starter), [`nestjs-starter`](https://github.com/Create-Node-App/cna-templates/tree/main/templates/nestjs-starter).
 
 ## Extension layout
 
@@ -117,7 +161,7 @@ Extensions add files on top of a compatible template. They do **not** define `cp
 CPA's loader prefers a `template/` subdirectory when present (`get_template_dir_path`). Put **generated-project artifacts** under `template/`, and keep the **bank-facing** `README.md` at the extension root. That matches Create-Node-App: the catalog README must not clobber the scaffolded project README.
 
 ```
-extensions/python-docker/
+extensions/fastapi-docker/
 ├── README.md                         # bank only (NOT copied)
 └── template/
     ├── Dockerfile
@@ -129,10 +173,10 @@ extensions/python-docker/
         └── README.md.append          # bullet appended into docs/README.md
 ```
 
-Example — Postgres:
+Example — universal Postgres:
 
 ```
-extensions/python-postgres/
+extensions/all-postgres/
 ├── README.md                         # bank only
 └── template/
     ├── pyproject.toml                # partial — merged into project manifest
@@ -230,9 +274,9 @@ Full reference: [create-python-app `docs/PYPROJECT_MERGE.md`](https://github.com
   "name": "GitHub Setup",
   "slug": "github-setup",
   "description": "GitHub Actions CI, issue templates, and Dependabot",
-  "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/github-setup",
-  "type": ["fastapi-backend"],
-  "category": "tooling",
+  "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/all-github-setup",
+  "type": ["fastapi-backend", "django-backend", "cli-app", "celery-worker", "uv-workspace"],
+  "category": "ci",
   "labels": ["GitHub", "CI", "DevOps"]
 }
 ```
@@ -281,7 +325,7 @@ export CPA_TEMPLATES_URL="file:///path/to/cpa-templates"
 
 uvx create-awesome-python-app my-app \
   --template fastapi-starter \
-  --addons github-setup python-docker \
+  --addons github-setup fastapi-docker \
   --yes
 ```
 
@@ -291,15 +335,17 @@ Verify generated output: `uv sync`, `uv run ruff check .`, `uv run pytest`, and 
 
 - [ ] `cpa.config.json` co-located with template (if prompts needed)
 - [ ] `pyproject.toml` with valid uv project metadata
+- [ ] Feature/module architecture (not a flat hello-world)
 - [ ] Typed Python documented (and tooling configured when ready): mypy / pyright
 - [ ] `.template` files use only defined Jinja variables
 - [ ] Entry added to `templates.json` with correct `type` and `category`
-- [ ] README + CONTRIBUTING + AGENTS + indexed `docs/` at CNA quality bar
+- [ ] README + CONTRIBUTING + AGENTS + full `docs/` suite (see quality bar above)
 - [ ] Local scaffold smoke test passes
 
 ## Checklist for new extensions
 
-- [ ] Compatible `type`(s) match target template(s)
+- [ ] Folder follows `all-*` or `{stack}-*` taxonomy (no misleading `python-*` for stack-bound code)
+- [ ] Compatible `type`(s) match target template(s) — broad only when truly portable
 - [ ] Artifacts under `template/`; bank `README.md` outside (does not overwrite project README)
 - [ ] `docs/<TOPIC>_GUIDE.md` + `docs/README.md.append` for generated-project docs
 - [ ] Partial `pyproject.toml` only when adding dependencies
@@ -307,7 +353,7 @@ Verify generated output: `uv sync`, `uv run ruff check .`, `uv run pytest`, and 
 - [ ] Compose files follow `compose.yml` / `docker/<engine>/` conventions
 - [ ] `incompatibleWith` defined for mutually exclusive extensions
 - [ ] Bank README covers when to use, what is copied, and verification pointers
-- [ ] Entry added to `templates.json`
+- [ ] Entry added to `templates.json` (`url` subdir matches folder name)
 
 ## Future templates
 
