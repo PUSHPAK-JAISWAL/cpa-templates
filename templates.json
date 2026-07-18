@@ -5,73 +5,345 @@
       "slug": "backend-applications",
       "name": "Backend Applications",
       "description": "API and service starters for FastAPI and similar Python backends.",
-      "details": "Use when the deliverable is an HTTP API or background worker — FastAPI for async APIs with OpenAPI docs.",
-      "labels": ["Backend", "API", "Python", "FastAPI"]
+      "details": "Use when the deliverable is an HTTP API or background worker \u2014 FastAPI for async APIs with OpenAPI docs.",
+      "labels": [
+        "Backend",
+        "API",
+        "Python",
+        "FastAPI"
+      ]
     },
     {
-      "slug": "tooling",
-      "name": "Tooling",
-      "description": "Extensions that add CI, containers, databases, and developer ergonomics.",
-      "details": "Layer these on top of a compatible template after choosing your base stack.",
-      "labels": ["DevOps", "CI", "Docker", "Tooling"]
+      "slug": "ci",
+      "name": "CI",
+      "description": "Continuous integration and repository automation.",
+      "details": "GitHub Actions, Dependabot, and related repository workflows.",
+      "labels": [
+        "CI",
+        "GitHub",
+        "DevOps"
+      ]
+    },
+    {
+      "slug": "containers",
+      "name": "Containers",
+      "description": "Docker and Compose packaging for the app.",
+      "details": "Add when you want container images and compose stacks for the API.",
+      "labels": [
+        "Docker",
+        "Compose",
+        "DevOps"
+      ]
+    },
+    {
+      "slug": "database",
+      "name": "Database",
+      "description": "Database services and connection scaffolding.",
+      "details": "Pair with the app when you need Postgres (or similar) locally/in compose.",
+      "labels": [
+        "PostgreSQL",
+        "Database"
+      ]
+    },
+    {
+      "slug": "editor",
+      "name": "Editor",
+      "description": "Editor and remote development ergonomics.",
+      "details": "Dev Containers and related IDE integrations.",
+      "labels": [
+        "DevContainer",
+        "VS Code"
+      ]
+    },
+    {
+      "slug": "cli-applications",
+      "name": "CLI Applications",
+      "description": "Command-line tools and console scripts.",
+      "details": "Use for Typer/Click CLIs and internal utilities shipped as entry points.",
+      "labels": [
+        "CLI",
+        "Python",
+        "Typer"
+      ]
+    },
+    {
+      "slug": "observability",
+      "name": "Observability",
+      "description": "Error tracking, metrics, and tracing integrations.",
+      "details": "Add when you need production diagnostics such as Sentry.",
+      "labels": [
+        "Observability",
+        "Sentry",
+        "Monitoring"
+      ]
+    },
+    {
+      "slug": "security",
+      "name": "Security",
+      "description": "Authentication and authorization scaffolds.",
+      "details": "JWT/session auth skeletons and related security helpers.",
+      "labels": [
+        "Auth",
+        "JWT",
+        "Security"
+      ]
+    },
+    {
+      "slug": "monorepo",
+      "name": "Monorepo",
+      "description": "Multi-package workspaces with shared tooling and one lockfile.",
+      "details": "Use when you need multiple libraries and apps in one repo \u2014 uv workspaces link members locally with a single virtual environment.",
+      "labels": [
+        "Monorepo",
+        "uv",
+        "Workspace",
+        "Python"
+      ]
     }
   ],
   "templates": [
     {
       "name": "FastAPI Starter",
       "slug": "fastapi-starter",
-      "description": "Production-ready FastAPI API with uv, Ruff, pytest, and pydantic-settings",
+      "description": "Production-ready FastAPI API with feature-based layout, uv, Ruff, pytest, mypy, pyright, and pydantic-settings. The reference CPA backend template.",
       "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/fastapi-starter",
       "type": "fastapi-backend",
       "category": "backend-applications",
-      "labels": ["FastAPI", "API", "Python", "uv", "Backend"]
+      "labels": [
+        "FastAPI",
+        "API",
+        "Python",
+        "uv",
+        "Backend",
+        "Type Hints",
+        "mypy",
+        "pyright"
+      ]
     },
     {
-      "name": "FastAPI Typed Starter",
-      "slug": "fastapi-typed-starter",
-      "description": "FastAPI starter with strict typing support, mypy, pyright, and type-focused developer tooling",
-      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/fastapi-typed-starter",
-      "type": "fastapi-backend",
+      "name": "CLI Starter",
+      "slug": "cli-starter",
+      "description": "Typer CLI with multi-command layout, uv, Ruff, pytest, and a console script entry point. Best for internal tools and shippable CLIs.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/cli-starter",
+      "type": "cli-app",
+      "category": "cli-applications",
+      "labels": [
+        "CLI",
+        "Typer",
+        "Python",
+        "uv"
+      ]
+    },
+    {
+      "name": "Celery Worker",
+      "slug": "celery-worker",
+      "description": "Celery worker with modular tasks, Redis defaults, pydantic-settings, and eager-mode tests. Choose it for background jobs outside the HTTP process.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/celery-worker",
+      "type": "celery-worker",
       "category": "backend-applications",
-      "labels": ["FastAPI", "API", "Python", "Type Hints", "mypy", "pyright"]
+      "labels": [
+        "Celery",
+        "Worker",
+        "Redis",
+        "Python",
+        "uv"
+      ]
+    },
+    {
+      "name": "Django API",
+      "slug": "django-api",
+      "description": "Django + DRF API with feature apps, OpenAPI-friendly health probes, uv, Ruff, and pytest-django. Use when you want Django's ORM and admin with a clean API layout.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/django-api",
+      "type": "django-backend",
+      "category": "backend-applications",
+      "labels": [
+        "Django",
+        "DRF",
+        "API",
+        "Python",
+        "uv"
+      ]
+    },
+    {
+      "name": "uv Workspace Starter",
+      "slug": "uv-workspace-starter",
+      "description": "Python monorepo using uv workspaces: shared packages/ libraries and apps/ deployables with one lockfile, Ruff, Pyright, and pytest.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=templates/uv-workspace-starter",
+      "type": "uv-workspace",
+      "category": "monorepo",
+      "labels": [
+        "Monorepo",
+        "uv",
+        "Workspace",
+        "Python",
+        "Typer"
+      ]
     }
   ],
   "extensions": [
     {
       "name": "GitHub Setup",
       "slug": "github-setup",
-      "description": "GitHub Actions CI, Dependabot, issue templates, and PR template",
-      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/github-setup",
-      "type": ["fastapi-backend"],
-      "category": "tooling",
-      "labels": ["GitHub", "CI", "DevOps"]
+      "description": "GitHub Actions CI, MegaLinter, Danger PR review, todo-to-issue, Dependabot, and issue/PR templates. Use for any CPA template that lives on GitHub.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/all-github-setup",
+      "type": [
+        "celery-worker",
+        "cli-app",
+        "django-backend",
+        "fastapi-backend",
+        "uv-workspace"
+      ],
+      "category": "ci",
+      "labels": [
+        "GitHub",
+        "CI",
+        "DevOps",
+        "MegaLinter",
+        "Danger"
+      ]
     },
     {
-      "name": "Python Docker",
-      "slug": "python-docker",
-      "description": "Dockerfile, compose.yml, and compose.prod.yml for local and containerized runs",
-      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/python-docker",
-      "type": ["fastapi-backend"],
-      "category": "tooling",
-      "labels": ["Docker", "DevOps", "Container"]
+      "name": "Development Container",
+      "slug": "development-container",
+      "description": "VS Code Dev Container with Python 3.12 and uv for consistent editor environments across stacks.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/all-devcontainer",
+      "type": [
+        "celery-worker",
+        "cli-app",
+        "django-backend",
+        "fastapi-backend",
+        "uv-workspace"
+      ],
+      "category": "editor",
+      "labels": [
+        "DevContainer",
+        "VS Code",
+        "uv"
+      ]
     },
     {
-      "name": "Python Postgres",
-      "slug": "python-postgres",
-      "description": "PostgreSQL service under docker/postgres/compose.yml plus env examples",
-      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/python-postgres",
-      "type": ["fastapi-backend"],
-      "category": "tooling",
-      "labels": ["PostgreSQL", "Database", "Docker"]
+      "name": "Postgres",
+      "slug": "postgres",
+      "description": "PostgreSQL 16 Compose service under docker/postgres/ plus env examples. Infra-only \u2014 does not write application ORM code.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/all-postgres",
+      "type": [
+        "celery-worker",
+        "django-backend",
+        "fastapi-backend"
+      ],
+      "category": "database",
+      "labels": [
+        "PostgreSQL",
+        "Database",
+        "Docker"
+      ]
     },
     {
-      "name": "Python Dev Container",
-      "slug": "python-devcontainer",
-      "description": "VS Code Dev Container with Python 3.12 and uv",
-      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/python-devcontainer",
-      "type": ["fastapi-backend"],
-      "category": "tooling",
-      "labels": ["DevContainer", "VS Code", "uv"]
+      "name": "FastAPI Docker",
+      "slug": "fastapi-docker",
+      "description": "Dockerfile and Compose for FastAPI (uvicorn app.main:app). Reach for it when containerizing the FastAPI starter.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-docker",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "containers",
+      "labels": [
+        "Docker",
+        "FastAPI",
+        "Container"
+      ]
+    },
+    {
+      "name": "Django Docker",
+      "slug": "django-docker",
+      "description": "Dockerfile and Compose for Django (runserver / gunicorn config.wsgi). Use with django-api.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/django-docker",
+      "type": [
+        "django-backend"
+      ],
+      "category": "containers",
+      "labels": [
+        "Docker",
+        "Django",
+        "Container"
+      ]
+    },
+    {
+      "name": "Celery Docker",
+      "slug": "celery-docker",
+      "description": "Dockerfile and Compose for a Celery worker plus Redis broker. Pair with a reachable BROKER_URL (Compose sets redis://redis:6379/0).",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/celery-docker",
+      "type": [
+        "celery-worker"
+      ],
+      "category": "containers",
+      "labels": [
+        "Docker",
+        "Celery",
+        "Container"
+      ]
+    },
+    {
+      "name": "FastAPI SQLAlchemy",
+      "slug": "fastapi-sqlalchemy",
+      "description": "SQLAlchemy 2.x session helpers and Alembic migrations for FastAPI (writes app/db/).",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-sqlalchemy",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "database",
+      "labels": [
+        "SQLAlchemy",
+        "Alembic",
+        "ORM",
+        "FastAPI"
+      ]
+    },
+    {
+      "name": "FastAPI Redis",
+      "slug": "fastapi-redis",
+      "description": "Redis client helper under app/core plus a local Redis Compose service for FastAPI apps.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-redis",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "database",
+      "labels": [
+        "Redis",
+        "Cache",
+        "FastAPI"
+      ]
+    },
+    {
+      "name": "FastAPI Sentry",
+      "slug": "fastapi-sentry",
+      "description": "Sentry SDK helper for FastAPI with env-driven init (no-op without SENTRY_DSN).",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-sentry",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "observability",
+      "labels": [
+        "Sentry",
+        "Observability",
+        "FastAPI"
+      ]
+    },
+    {
+      "name": "FastAPI Auth JWT",
+      "slug": "fastapi-auth-jwt",
+      "description": "JWT auth feature skeleton under app/features/auth for FastAPI starters.",
+      "url": "https://github.com/Create-Python-App/cpa-templates?subdir=extensions/fastapi-auth-jwt",
+      "type": [
+        "fastapi-backend"
+      ],
+      "category": "security",
+      "labels": [
+        "Auth",
+        "JWT",
+        "FastAPI",
+        "Security"
+      ]
     }
   ]
 }

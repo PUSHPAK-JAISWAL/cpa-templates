@@ -62,7 +62,7 @@ Expect HTTP `200` and `"dev_code": "HEALTH_OK"`.
 
 ### Docker Compose
 
-Pair this API with the `python-docker` / `python-postgres` extensions when you
+Pair this API with the `fastapi-docker` / `postgres` extensions when you
 need local containers or a database. Keep the API service dependent on DB health
 before accepting traffic.
 
@@ -90,4 +90,5 @@ before accepting traffic.
 
 - [`API.md`](./API.md) — envelope and health contract
 - [`TESTING_GUIDE.md`](./TESTING_GUIDE.md) — pre-deploy verification
+- [`CONFIGURATION.md`](./CONFIGURATION.md) — env and tooling
 - [`PROJECT_STRUCTURE.md`](./PROJECT_STRUCTURE.md) — where to place new features

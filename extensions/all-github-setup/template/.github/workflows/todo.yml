@@ -1,0 +1,43 @@
+name: Todo Checker
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  todo:
+    runs-on: ubuntu-latest
+
+    # Least privilege: only escalate what the action needs to open issues/PRs.
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: TODO to Issue
+        uses: alstr/todo-to-issue-action@v5.1.13
+        id: todo
+        with:
+          INSERT_ISSUE_URLS: "true"
+          CLOSE_ISSUES: "true"
+
+      # Prefer a bot PR over a direct push to main (safer default for scaffolds).
+      - name: Open PR with TODO issue links
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: link TODOs to GitHub issues"
+          title: "chore: link TODOs to GitHub issues"
+          body: |
+            Automated by the Todo Checker workflow.
+            Inserts GitHub issue URLs next to `TODO` comments discovered on `main`.
+          branch: chore/todo-issue-links
+          delete-branch: true
