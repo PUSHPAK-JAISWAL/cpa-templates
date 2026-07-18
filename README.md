@@ -63,3 +63,11 @@ Scaffolding always uses `uvx create-awesome-python-app@latest` from PyPI (never 
 
 - [create-python-app](https://github.com/Create-Python-App/create-python-app) — CLI monorepo (scaffolding engine)
 - [Create-Python-App](https://github.com/Create-Python-App) — organization home
+
+## 👥 Contributors
+
+<a href="https://github.com/Create-Python-App/cpa-templates/contributors">
+  <img src="https://contrib.rocks/image?repo=Create-Python-App/cpa-templates"/>
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
