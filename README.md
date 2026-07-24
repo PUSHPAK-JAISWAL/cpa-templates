@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Python Version](https://img.shields.io/badge/python-3.12+-green.svg)
+[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/bR5VyATgka)
 
 Official templates and extensions for [create-awesome-python-app](https://github.com/Create-Python-App/create-python-app).
 
@@ -31,7 +32,11 @@ CI=true uvx create-awesome-python-app my-api \
 
 | Template | Type | Use case |
 |----------|------|----------|
-| [fastapi-starter](./templates/fastapi-starter) | `fastapi-backend` | HTTP APIs with FastAPI, uv, ruff, pytest, mypy, and pyright |
+| [fastapi-starter](./templates/fastapi-starter) | `fastapi-backend` | Production-ready FastAPI API with feature-based layout, uv, Ruff, pytest, mypy, and pyright |
+| [cli-starter](./templates/cli-starter) | `cli-app` | Typer CLI with multi-command layout, uv, Ruff, pytest, and a console script entry point |
+| [celery-worker](./templates/celery-worker) | `celery-worker` | Celery worker with modular tasks, Redis defaults, pydantic-settings, and eager-mode tests |
+| [django-api](./templates/django-api) | `django-backend` | Django + DRF API with feature apps, OpenAPI-friendly health probes, uv, and Ruff |
+| [uv-workspace-starter](./templates/uv-workspace-starter) | `uv-workspace` | Python monorepo using uv workspaces: shared packages and apps with one lockfile, Ruff, and Pyright |
 
 ## Documentation
 
